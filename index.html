@@ -64,7 +64,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -105,7 +105,7 @@
     }
 
     .nav-name {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'DM Serif Display', serif;
       font-size: 1.05rem;
       font-weight: 400;
       letter-spacing: 0.03em;
@@ -143,7 +143,6 @@
       color: var(--bg);
       border: none;
       padding: 8px 18px;
-      font-family: 'DM Sans', sans-serif;
       font-size: 0.72rem;
       font-weight: 400;
       letter-spacing: 0.08em;
@@ -213,7 +212,7 @@
     }
 
     .hero-name {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'DM Serif Display', serif;
       font-size: clamp(2.4rem, 5vw, 3.6rem);
       font-weight: 400;
       line-height: 1.1;
@@ -271,6 +270,7 @@
       color: var(--text);
       max-width: 600px;
     }
+    #about p + p { margin-top: 1.4rem; }
 
     /* ── EXPERIENCE ── */
     .exp-list { display: flex; flex-direction: column; gap: 32px; }
@@ -292,7 +292,6 @@
     }
 
     .job-badge {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 0.62rem;
       color: var(--accent);
       letter-spacing: 0.06em;
@@ -300,7 +299,7 @@
     }
 
     .job-company {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'DM Serif Display', serif;
       font-size: 1.55rem;
       font-weight: 400;
       line-height: 1.1;
@@ -341,7 +340,6 @@
     }
 
     .job-role-tag {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 0.6rem;
       color: var(--accent);
       border: 1px solid var(--accent);
@@ -403,10 +401,9 @@
     }
 
     .skill {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
       font-weight: 400;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.07em;
       color: var(--text);
       border: 1px solid var(--border);
       padding: 6px 14px;
@@ -462,7 +459,6 @@
     .lang-name { color: var(--text); }
 
     .lang-code {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 0.65rem;
       color: var(--accent);
       letter-spacing: 0.06em;
@@ -491,7 +487,6 @@
       border: 1px solid var(--text);
       color: var(--text);
       padding: 11px 28px;
-      font-family: 'DM Sans', sans-serif;
       font-size: 0.72rem;
       font-weight: 400;
       letter-spacing: 0.1em;
@@ -523,7 +518,6 @@
     }
 
     .contact-key {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 0.62rem;
       color: var(--text-muted);
       letter-spacing: 0.08em;
@@ -569,7 +563,6 @@
       }
 
       #hero {
-        min-height: auto;
         padding-top: 0;
         padding-bottom: 24pt;
       }
@@ -649,7 +642,7 @@
       At Documo, I've grown from individual contributor to leading a team, owning architecture
       decisions, and driving delivery of a SaaS platform used by thousands of businesses.
     </p>
-    <p style="margin-top: 1.4rem; font-size: 1.05rem; line-height: 1.8; max-width: 600px;">
+    <p>
       I stay close to the cutting edge — including integrating AI coding tools into my daily
       workflow to ship faster and maintain higher standards. I work well both independently
       and as part of distributed teams, and I'm always looking for problems worth solving.
@@ -869,26 +862,17 @@
 
   let revealed = false;
 
-  function buildContact() {
-    const d = _e.map(s => atob(s));
-    const e  = d[0];
-    const gl = d[1];
-    const g  = gl.replace('https://', '');
-    const ll = d[2];
-    const l  = ll.replace('https://www.', '').replace(/\/$/, '');
-    const tl = d[3];
-    const t  = '\u0040' + tl.split('/').pop();
-    return { e, g, gl, l, ll, t, tl };
-  }
-
   function revealContact() {
     if (revealed) return;
     revealed = true;
-    const c = buildContact();
-    document.getElementById('c-email').innerHTML    = `<a href="mailto:${c.e}">${c.e}</a>`;
-    document.getElementById('c-github').innerHTML   = `<a href="${c.gl}" target="_blank" rel="noopener">${c.g}</a>`;
-    document.getElementById('c-linkedin').innerHTML = `<a href="${c.ll}" target="_blank" rel="noopener">${c.l}</a>`;
-    document.getElementById('c-telegram').innerHTML = `<a href="${c.tl}" target="_blank" rel="noopener">${c.t}</a>`;
+    const [e, gl, ll, tl] = _e.map(s => atob(s));
+    const g = gl.replace('https://', '');
+    const l = ll.replace('https://www.', '').replace(/\/$/, '');
+    const t = '\u0040' + tl.split('/').pop();
+    document.getElementById('c-email').innerHTML    = `<a href="mailto:${e}">${e}</a>`;
+    document.getElementById('c-github').innerHTML   = `<a href="${gl}" target="_blank" rel="noopener">${g}</a>`;
+    document.getElementById('c-linkedin').innerHTML = `<a href="${ll}" target="_blank" rel="noopener">${l}</a>`;
+    document.getElementById('c-telegram').innerHTML = `<a href="${tl}" target="_blank" rel="noopener">${t}</a>`;
     document.getElementById('contactItems').classList.add('revealed');
     document.getElementById('revealBtn').style.display = 'none';
   }
