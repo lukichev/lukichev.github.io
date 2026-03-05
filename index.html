@@ -70,7 +70,6 @@
 
     :root {
       --bg:           #F8F7F4;
-      --bg-alt:       #F2F1ED;
       --text:         #1A1918;
       --text-muted:   #6E6C68;
       --accent:       #8A9E84;
@@ -187,7 +186,6 @@
     #hero {
       padding-top: 36px;
       padding-bottom: 28px;
-      min-height: auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -313,7 +311,6 @@
     .job-roles {
       display: flex;
       flex-direction: column;
-      gap: 0;
       border-left: 2px solid var(--border);
       padding-left: 16px;
     }
@@ -590,7 +587,7 @@
       }
 
       .section-label { color: #777; }
-      .section-label::after { background: #ccc; }
+      .section-label::before { background: #ccc; }
 
       .job { grid-template-columns: 110pt 1fr; gap: 0 16pt; }
       .job-role-tag { display: none; }
