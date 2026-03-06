@@ -135,7 +135,42 @@
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
+    }
+
+    /* ── LANG TRANSITION ── */
+    [data-i18n] { transition: opacity 0.12s ease; }
+    [data-i18n].lang-fade { opacity: 0; }
+
+    /* ── LANG SWITCHER ── */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 3px 5px;
+      transition: color 0.2s;
+      line-height: 1;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active { color: var(--text); }
+
+    .lang-sep {
+      font-size: 0.6rem;
+      color: var(--border);
+      user-select: none;
+      padding: 0 1px;
     }
 
     .btn-pdf {
@@ -209,6 +244,7 @@
       height: 5px;
       border-radius: 50%;
       background: var(--accent);
+      flex-shrink: 0;
     }
 
     .hero-name {
@@ -256,6 +292,7 @@
       height: 6px;
       border-radius: 50%;
       background: var(--text-muted);
+      flex-shrink: 0;
     }
 
     @keyframes rise {
@@ -609,13 +646,18 @@
 <nav>
   <a href="#hero" class="nav-name">Andrew Lukichev</a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about" data-i18n="nav.about">About</a></li>
+    <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+    <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <button class="btn-pdf" onclick="exportPDF()">Export PDF</button>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button>
+    </div>
+    <button class="btn-pdf" data-i18n="nav.pdf" onclick="exportPDF()">Export PDF</button>
   </div>
 </nav>
 
@@ -623,26 +665,26 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-location">Oviedo, Spain &nbsp;·&nbsp; GMT+2</div>
+    <div class="hero-location" data-i18n="hero.location">Oviedo, Spain &nbsp;·&nbsp; GMT+2</div>
     <h1 class="hero-name">Andrew Lukichev</h1>
-    <p class="hero-title">
+    <p class="hero-title" data-i18n="hero.title">
       <strong>Full Stack Developer</strong> &amp; Team Lead —<br>
       Backend, Frontend, Node.js, NestJS, Angular
     </p>
-    <p class="hero-open">Currently at Documo Inc.</p>
+    <p class="hero-open" data-i18n="hero.open">Currently at Documo Inc.</p>
   </section>
 
   <!-- ABOUT -->
   <section id="about">
-    <h2 class="section-label">About</h2>
-    <p>
+    <h2 class="section-label" data-i18n="nav.about">About</h2>
+    <p data-i18n="about.p1">
       I'm a Full Stack Developer and Team Lead with 10+ years of experience shipping production
       software. My specialty is the Node.js and TypeScript ecosystem — building APIs,
       distributed services, and Angular frontends that are fast, maintainable, and secure.
       At Documo, I've grown from individual contributor to leading a team, owning architecture
       decisions, and driving delivery of a SaaS platform used by thousands of businesses.
     </p>
-    <p>
+    <p data-i18n="about.p2">
       I stay close to the cutting edge — including integrating AI coding tools into my daily
       workflow to ship faster and maintain higher standards. I work well both independently
       and as part of distributed teams, and I'm always looking for problems worth solving.
@@ -651,14 +693,14 @@
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <h2 class="section-label">Experience</h2>
+    <h2 class="section-label" data-i18n="nav.experience">Experience</h2>
     <div class="exp-list">
 
       <!-- Documo: two roles, one company -->
       <div class="job">
         <div class="job-meta">
-          <div class="job-period">Dec 2016 — Present</div>
-          <div class="job-badge">Full-time · Remote</div>
+          <div class="job-period" data-i18n="exp.documo.period">Dec 2016 — Present</div>
+          <div class="job-badge" data-i18n="exp.documo.badge">Full-time · Remote</div>
         </div>
         <div class="job-content">
           <div class="job-company">Documo Inc.</div>
@@ -666,27 +708,27 @@
 
             <div class="job-role-block">
               <div class="job-role-header">
-                <span class="job-role">Team Lead, Full Stack Developer</span>
-                <span class="job-role-tag">Current</span>
-                <span class="job-role-period">Jun 2022 — Present</span>
+                <span class="job-role" data-i18n="exp.documo.role1.title">Team Lead, Full Stack Developer</span>
+                <span class="job-role-tag" data-i18n="exp.documo.role1.tag">Current</span>
+                <span class="job-role-period" data-i18n="exp.documo.role1.period">Jun 2022 — Present</span>
               </div>
               <ul class="job-bullets">
-                <li>Led development of a HIPAA, SOC 2, and HITRUST-compliant SaaS platform for online fax services, serving thousands of customers in the US healthcare sector.</li>
-                <li>Managed and mentored a team of 5 developers — coding best practices, project management, and career growth.</li>
-                <li>Designed and implemented features with Node.js, NestJS, and TypeScript, maintaining 99.9% system availability targets.</li>
-                <li>Owned compliance engineering across data handling, audit trails, and access control — supporting HIPAA, SOC 2, and HITRUST audits with no exceptions.</li>
-                <li>Conducted code reviews, testing, and deployments to ensure application quality and stability.</li>
+                <li data-i18n="exp.documo.role1.b1">Led development of a HIPAA, SOC 2, and HITRUST-compliant SaaS platform for online fax services, serving thousands of customers in the US healthcare sector.</li>
+                <li data-i18n="exp.documo.role1.b2">Managed and mentored a team of 5 developers — coding best practices, project management, and career growth.</li>
+                <li data-i18n="exp.documo.role1.b3">Designed and implemented features with Node.js, NestJS, and TypeScript, maintaining 99.9% system availability targets.</li>
+                <li data-i18n="exp.documo.role1.b4">Owned compliance engineering across data handling, audit trails, and access control — supporting HIPAA, SOC 2, and HITRUST audits with no exceptions.</li>
+                <li data-i18n="exp.documo.role1.b5">Conducted code reviews, testing, and deployments to ensure application quality and stability.</li>
               </ul>
             </div>
 
             <div class="job-role-block">
               <div class="job-role-header">
-                <span class="job-role">Full Stack Developer</span>
-                <span class="job-role-period">Dec 2016 — Jun 2022</span>
+                <span class="job-role" data-i18n="exp.documo.role2.title">Full Stack Developer</span>
+                <span class="job-role-period" data-i18n="exp.documo.role2.period">Dec 2016 — Jun 2022</span>
               </div>
               <ul class="job-bullets">
-                <li>Led the creation of a new SaaS application for online fax services from initial designs and continued to lead its development moving forward.</li>
-                <li>Built and maintained core features using Angular, TypeScript, and Node.js.</li>
+                <li data-i18n="exp.documo.role2.b1">Led the creation of a new SaaS application for online fax services from initial designs and continued to lead its development moving forward.</li>
+                <li data-i18n="exp.documo.role2.b2">Built and maintained core features using Angular, TypeScript, and Node.js.</li>
               </ul>
             </div>
 
@@ -697,17 +739,17 @@
       <!-- Upwork -->
       <div class="job">
         <div class="job-meta">
-          <div class="job-period">Jan 2015 — Aug 2017</div>
-          <div class="job-badge">Freelance · Remote</div>
+          <div class="job-period" data-i18n="exp.upwork.period">Jan 2015 — Aug 2017</div>
+          <div class="job-badge" data-i18n="exp.upwork.badge">Freelance · Remote</div>
         </div>
         <div class="job-content">
           <div class="job-company">Upwork</div>
-          <div class="job-single-role">Web Developer</div>
+          <div class="job-single-role" data-i18n="exp.upwork.role">Web Developer</div>
           <ul class="job-bullets">
-            <li>Designed, developed, and maintained web applications, CMS/CRUD systems, and products using modern web technologies.</li>
-            <li>Architected and developed secure REST APIs for internal and external use, with authentication and caching.</li>
-            <li>Led code integration, refactoring, and redesign efforts to improve maintainability, performance, and UX.</li>
-            <li>Managed relational and NoSQL databases — data integrity, performance, backups, and recovery strategies.</li>
+            <li data-i18n="exp.upwork.b1">Designed, developed, and maintained web applications, CMS/CRUD systems, and products using modern web technologies.</li>
+            <li data-i18n="exp.upwork.b2">Architected and developed secure REST APIs for internal and external use, with authentication and caching.</li>
+            <li data-i18n="exp.upwork.b3">Led code integration, refactoring, and redesign efforts to improve maintainability, performance, and UX.</li>
+            <li data-i18n="exp.upwork.b4">Managed relational and NoSQL databases — data integrity, performance, backups, and recovery strategies.</li>
           </ul>
         </div>
       </div>
@@ -716,13 +758,13 @@
       <div class="job">
         <div class="job-meta">
           <div class="job-period">2012 — 2014</div>
-          <div class="job-badge">Freelance</div>
+          <div class="job-badge" data-i18n="exp.flru.badge">Freelance</div>
         </div>
         <div class="job-content">
           <div class="job-company">FL.ru</div>
-          <div class="job-single-role">Web Developer</div>
+          <div class="job-single-role" data-i18n="exp.flru.role">Web Developer</div>
           <ul class="job-bullets">
-            <li>Built landing pages and websites for clients, including PSD-to-HTML conversions.</li>
+            <li data-i18n="exp.flru.b1">Built landing pages and websites for clients, including PSD-to-HTML conversions.</li>
           </ul>
         </div>
       </div>
@@ -732,11 +774,11 @@
 
   <!-- SKILLS -->
   <section id="skills">
-    <h2 class="section-label">Skills</h2>
+    <h2 class="section-label" data-i18n="nav.skills">Skills</h2>
     <div class="skills-groups">
 
       <div class="skill-group">
-        <div class="skill-group-label">Backend</div>
+        <div class="skill-group-label" data-i18n="skills.backend">Backend</div>
         <div class="skills-grid">
           <span class="skill">Node.js</span>
           <span class="skill">NestJS</span>
@@ -748,7 +790,7 @@
       </div>
 
       <div class="skill-group">
-        <div class="skill-group-label">Frontend</div>
+        <div class="skill-group-label" data-i18n="skills.frontend">Frontend</div>
         <div class="skills-grid">
           <span class="skill">Angular</span>
           <span class="skill">React</span>
@@ -757,7 +799,7 @@
       </div>
 
       <div class="skill-group">
-        <div class="skill-group-label">Databases</div>
+        <div class="skill-group-label" data-i18n="skills.databases">Databases</div>
         <div class="skills-grid">
           <span class="skill">PostgreSQL</span>
           <span class="skill">MySQL</span>
@@ -766,19 +808,19 @@
       </div>
 
       <div class="skill-group">
-        <div class="skill-group-label">Compliance &amp; Security</div>
+        <div class="skill-group-label" data-i18n="skills.compliance">Compliance &amp; Security</div>
         <div class="skills-grid">
           <span class="skill">HIPAA</span>
           <span class="skill">SOC 2</span>
           <span class="skill">HITRUST</span>
-          <span class="skill">Web Security</span>
-          <span class="skill">Access Control</span>
-          <span class="skill">Audit Logging</span>
+          <span class="skill" data-i18n="skills.websecurity">Web Security</span>
+          <span class="skill" data-i18n="skills.accesscontrol">Access Control</span>
+          <span class="skill" data-i18n="skills.auditlogging">Audit Logging</span>
         </div>
       </div>
 
       <div class="skill-group">
-        <div class="skill-group-label">AI Tools</div>
+        <div class="skill-group-label" data-i18n="skills.aitools">AI Tools</div>
         <div class="skills-grid">
           <span class="skill ai">Claude Code</span>
           <span class="skill ai">GitHub Copilot</span>
@@ -791,31 +833,31 @@
 
   <!-- BACKGROUND -->
   <section id="background">
-    <h2 class="section-label">Background</h2>
+    <h2 class="section-label" data-i18n="bg.label">Background</h2>
     <div class="bg-grid">
       <div>
-        <div class="bg-sub">Languages</div>
+        <div class="bg-sub" data-i18n="bg.languages">Languages</div>
         <ul class="lang-list">
           <li class="lang-item">
-            <span class="lang-name">English</span>
+            <span class="lang-name" data-i18n="bg.lang.en">English</span>
             <span class="lang-code">C2</span>
           </li>
           <li class="lang-item">
-            <span class="lang-name">Spanish</span>
+            <span class="lang-name" data-i18n="bg.lang.es">Spanish</span>
             <span class="lang-code">B1</span>
           </li>
           <li class="lang-item">
-            <span class="lang-name">Russian</span>
-            <span class="lang-code">Native</span>
+            <span class="lang-name" data-i18n="bg.lang.ru">Russian</span>
+            <span class="lang-code" data-i18n="bg.lang.ru.level">Native</span>
           </li>
         </ul>
       </div>
       <div>
-        <div class="bg-sub">Education</div>
+        <div class="bg-sub" data-i18n="bg.education">Education</div>
         <ul class="edu-list">
           <li class="edu-item">
-            <div class="edu-school">Tambov State Technical University</div>
-            <div class="edu-detail">2010 – 2012 &nbsp;·&nbsp; Computer Operator</div>
+            <div class="edu-school" data-i18n="bg.edu.school">Tambov State Technical University</div>
+            <div class="edu-detail" data-i18n="bg.edu.detail">2010 – 2012 &nbsp;·&nbsp; Computer Operator</div>
           </li>
         </ul>
       </div>
@@ -824,9 +866,9 @@
 
   <!-- CONTACT -->
   <section id="contact">
-    <h2 class="section-label">Contact</h2>
-    <p class="contact-note">Want to work together or just say hello? Reveal my contact details below.</p>
-    <button class="btn-reveal" id="revealBtn" onclick="revealContact()">Reveal Contact</button>
+    <h2 class="section-label" data-i18n="nav.contact">Contact</h2>
+    <p class="contact-note" data-i18n="contact.note">Want to work together or just say hello? Reveal my contact details below.</p>
+    <button class="btn-reveal" id="revealBtn" onclick="revealContact()" data-i18n="contact.reveal">Reveal Contact</button>
     <div class="contact-items" id="contactItems">
       <div class="contact-row">
         <span class="contact-key">Email</span>
@@ -849,10 +891,179 @@
 
 </main>
 
-<footer>Andrew Lukichev &nbsp;·&nbsp; Full Stack Developer &nbsp;·&nbsp; Oviedo, Spain</footer>
+<footer data-i18n="footer">Andrew Lukichev &nbsp;·&nbsp; Full Stack Developer &nbsp;·&nbsp; Oviedo, Spain</footer>
 
 <script>
-  // Contact encoded — not plain text in source
+  // ── i18n ──
+  const translations = {
+    en: {
+      'page.title':               'Andrew Lukichev — Full Stack Developer & Team Lead | Node.js, NestJS, TypeScript',
+      'nav.about':                'About',
+      'nav.experience':           'Experience',
+      'nav.skills':               'Skills',
+      'nav.contact':              'Contact',
+      'nav.pdf':                  'Export PDF',
+      'hero.location':            'Oviedo, Spain &nbsp;·&nbsp; GMT+2',
+      'hero.title':               '<strong>Full Stack Developer</strong> &amp; Team Lead —<br>Backend, Frontend, Node.js, NestJS, Angular',
+      'hero.open':                'Currently at Documo Inc.',
+      'about.p1':                 'I\'m a Full Stack Developer and Team Lead with 10+ years of experience shipping production software. My specialty is the Node.js and TypeScript ecosystem — building APIs, distributed services, and Angular frontends that are fast, maintainable, and secure. At Documo, I\'ve grown from individual contributor to leading a team, owning architecture decisions, and driving delivery of a SaaS platform used by thousands of businesses.',
+      'about.p2':                 'I stay close to the cutting edge — including integrating AI coding tools into my daily workflow to ship faster and maintain higher standards. I work well both independently and as part of distributed teams, and I\'m always looking for problems worth solving.',
+      'exp.documo.period':        'Dec 2016 — Present',
+      'exp.documo.badge':         'Full-time · Remote',
+      'exp.documo.role1.title':   'Team Lead, Full Stack Developer',
+      'exp.documo.role1.tag':     'Current',
+      'exp.documo.role1.period':  'Jun 2022 — Present',
+      'exp.documo.role1.b1':      'Led development of a HIPAA, SOC 2, and HITRUST-compliant SaaS platform for online fax services, serving thousands of customers in the US healthcare sector.',
+      'exp.documo.role1.b2':      'Managed and mentored a team of 5 developers — coding best practices, project management, and career growth.',
+      'exp.documo.role1.b3':      'Designed and implemented features with Node.js, NestJS, and TypeScript, maintaining 99.9% system availability targets.',
+      'exp.documo.role1.b4':      'Owned compliance engineering across data handling, audit trails, and access control — supporting HIPAA, SOC 2, and HITRUST audits with no exceptions.',
+      'exp.documo.role1.b5':      'Conducted code reviews, testing, and deployments to ensure application quality and stability.',
+      'exp.documo.role2.title':   'Full Stack Developer',
+      'exp.documo.role2.period':  'Dec 2016 — Jun 2022',
+      'exp.documo.role2.b1':      'Led the creation of a new SaaS application for online fax services from initial designs and continued to lead its development moving forward.',
+      'exp.documo.role2.b2':      'Built and maintained core features using Angular, TypeScript, and Node.js.',
+      'exp.upwork.period':        'Jan 2015 — Aug 2017',
+      'exp.upwork.badge':         'Freelance · Remote',
+      'exp.upwork.role':          'Web Developer',
+      'exp.upwork.b1':            'Designed, developed, and maintained web applications, CMS/CRUD systems, and products using modern web technologies.',
+      'exp.upwork.b2':            'Architected and developed secure REST APIs for internal and external use, with authentication and caching.',
+      'exp.upwork.b3':            'Led code integration, refactoring, and redesign efforts to improve maintainability, performance, and UX.',
+      'exp.upwork.b4':            'Managed relational and NoSQL databases — data integrity, performance, backups, and recovery strategies.',
+      'exp.flru.badge':           'Freelance',
+      'exp.flru.role':            'Web Developer',
+      'exp.flru.b1':              'Built landing pages and websites for clients, including PSD-to-HTML conversions.',
+      'skills.backend':           'Backend',
+      'skills.frontend':          'Frontend',
+      'skills.databases':         'Databases',
+      'skills.compliance':        'Compliance &amp; Security',
+      'skills.websecurity':       'Web Security',
+      'skills.accesscontrol':     'Access Control',
+      'skills.auditlogging':      'Audit Logging',
+      'skills.aitools':           'AI Tools',
+      'bg.label':                 'Background',
+      'bg.languages':             'Languages',
+      'bg.education':             'Education',
+      'bg.lang.en':               'English',
+      'bg.lang.es':               'Spanish',
+      'bg.lang.ru':               'Russian',
+      'bg.lang.ru.level':         'Native',
+      'bg.edu.school':            'Tambov State Technical University',
+      'bg.edu.detail':            '2010 – 2012 &nbsp;·&nbsp; Computer Operator',
+      'contact.note':             'Want to work together or just say hello? Reveal my contact details below.',
+      'contact.reveal':           'Reveal Contact',
+      'footer':                   'Andrew Lukichev &nbsp;·&nbsp; Full Stack Developer &nbsp;·&nbsp; Oviedo, Spain',
+    },
+    es: {
+      'page.title':               'Andrew Lukichev — Desarrollador Full Stack y Líder Técnico | Node.js, NestJS, TypeScript',
+      'nav.about':                'Sobre mí',
+      'nav.experience':           'Experiencia',
+      'nav.skills':               'Habilidades',
+      'nav.contact':              'Contacto',
+      'nav.pdf':                  'Exportar PDF',
+      'hero.location':            'Oviedo, España &nbsp;·&nbsp; GMT+2',
+      'hero.title':               '<strong>Desarrollador Full Stack</strong> y Líder Técnico —<br>Backend, Frontend, Node.js, NestJS, Angular',
+      'hero.open':                'Actualmente en Documo Inc.',
+      'about.p1':                 'Soy desarrollador Full Stack y Líder Técnico con más de 10 años de experiencia entregando software en producción. Mi especialidad es el ecosistema de Node.js y TypeScript — construyendo APIs, servicios distribuidos y frontends en Angular que son rápidos, mantenibles y seguros. En Documo, he pasado de ser colaborador individual a liderar un equipo, tomando decisiones de arquitectura e impulsando la entrega de una plataforma SaaS utilizada por miles de empresas.',
+      'about.p2':                 'Me mantengo al día con las últimas tecnologías — incluyendo la integración de herramientas de IA en mi flujo de trabajo diario para entregar más rápido y mantener mayores estándares. Trabajo bien tanto de forma independiente como en equipos distribuidos, y siempre estoy buscando problemas que valga la pena resolver.',
+      'exp.documo.period':        'Dic 2016 — Presente',
+      'exp.documo.badge':         'Tiempo completo · Remoto',
+      'exp.documo.role1.title':   'Líder Técnico, Desarrollador Full Stack',
+      'exp.documo.role1.tag':     'Actual',
+      'exp.documo.role1.period':  'Jun 2022 — Presente',
+      'exp.documo.role1.b1':      'Lideré el desarrollo de una plataforma SaaS para servicios de fax online, cumpliente con HIPAA, SOC 2 e HITRUST, que sirve a miles de clientes del sector sanitario en EE. UU.',
+      'exp.documo.role1.b2':      'Gestioné y mentoricé un equipo de 5 desarrolladores — buenas prácticas de código, gestión de proyectos y desarrollo profesional.',
+      'exp.documo.role1.b3':      'Diseñé e implementé funcionalidades con Node.js, NestJS y TypeScript, manteniendo objetivos de disponibilidad del sistema del 99,9%.',
+      'exp.documo.role1.b4':      'Responsable de la ingeniería de cumplimiento en el manejo de datos, registros de auditoría y control de acceso — apoyando auditorías HIPAA, SOC 2 e HITRUST sin excepciones.',
+      'exp.documo.role1.b5':      'Realicé revisiones de código, pruebas y despliegues para garantizar la calidad y estabilidad de la aplicación.',
+      'exp.documo.role2.title':   'Desarrollador Full Stack',
+      'exp.documo.role2.period':  'Dic 2016 — Jun 2022',
+      'exp.documo.role2.b1':      'Lideré la creación de una nueva aplicación SaaS para servicios de fax online desde los diseños iniciales y continué liderando su desarrollo.',
+      'exp.documo.role2.b2':      'Desarrollé y mantuve funcionalidades principales usando Angular, TypeScript y Node.js.',
+      'exp.upwork.period':        'Ene 2015 — Ago 2017',
+      'exp.upwork.badge':         'Autónomo · Remoto',
+      'exp.upwork.role':          'Desarrollador Web',
+      'exp.upwork.b1':            'Diseñé, desarrollé y mantuve aplicaciones web, sistemas CMS/CRUD y productos usando tecnologías web modernas.',
+      'exp.upwork.b2':            'Diseñé y desarrollé APIs REST seguras para uso interno y externo, con autenticación y caché.',
+      'exp.upwork.b3':            'Lideré la integración de código, refactorización y rediseño para mejorar la mantenibilidad, el rendimiento y la experiencia de usuario.',
+      'exp.upwork.b4':            'Gestioné bases de datos relacionales y NoSQL — integridad de datos, rendimiento, copias de seguridad y estrategias de recuperación.',
+      'exp.flru.badge':           'Autónomo',
+      'exp.flru.role':            'Desarrollador Web',
+      'exp.flru.b1':              'Desarrollé páginas de aterrizaje y sitios web para clientes, incluyendo conversiones de PSD a HTML.',
+      'skills.backend':           'Backend',
+      'skills.frontend':          'Frontend',
+      'skills.databases':         'Bases de Datos',
+      'skills.compliance':        'Cumplimiento y Seguridad',
+      'skills.websecurity':       'Seguridad Web',
+      'skills.accesscontrol':     'Control de Acceso',
+      'skills.auditlogging':      'Registro de Auditoría',
+      'skills.aitools':           'Herramientas de IA',
+      'bg.label':                 'Formación',
+      'bg.languages':             'Idiomas',
+      'bg.education':             'Educación',
+      'bg.lang.en':               'Inglés',
+      'bg.lang.es':               'Español',
+      'bg.lang.ru':               'Ruso',
+      'bg.lang.ru.level':         'Nativo',
+      'bg.edu.school':            'Universidad Técnica Estatal de Tambov',
+      'bg.edu.detail':            '2010 – 2012 &nbsp;·&nbsp; Operador Informático',
+      'contact.note':             '¿Quieres colaborar o simplemente saludar? Muestra mis datos de contacto a continuación.',
+      'contact.reveal':           'Mostrar Contacto',
+      'footer':                   'Andrew Lukichev &nbsp;·&nbsp; Desarrollador Full Stack &nbsp;·&nbsp; Oviedo, España',
+    }
+  };
+
+  let currentLang = 'en';
+
+  function setLang(lang, { pushState = true } = {}) {
+    if (lang === currentLang) return;
+
+    const els = Array.from(document.querySelectorAll('[data-i18n]'));
+
+    // Fade out, then swap content, then fade in
+    els.forEach(el => el.classList.add('lang-fade'));
+
+    setTimeout(() => {
+      currentLang = lang;
+
+      document.documentElement.lang = lang;
+      document.title = translations[lang]['page.title'];
+
+      els.forEach(el => {
+        const key = el.dataset.i18n;
+        if (translations[lang][key] !== undefined) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      localStorage.setItem('lang', lang);
+
+      if (pushState) {
+        const url = new URL(window.location);
+        if (lang === 'en') {
+          url.searchParams.delete('lang');
+        } else {
+          url.searchParams.set('lang', lang);
+        }
+        history.replaceState(null, '', url);
+      }
+
+      // Trigger fade in on next frame so the DOM has updated
+      requestAnimationFrame(() => {
+        els.forEach(el => el.classList.remove('lang-fade'));
+      });
+    }, 120);
+  }
+
+  // Query param takes priority over localStorage
+  const paramLang = new URLSearchParams(window.location.search).get('lang');
+  const savedLang = paramLang || localStorage.getItem('lang');
+  if (savedLang === 'es') setLang('es');
+
+  // ── Contact ──
   const _e = [
     'YW5kcmV3bHVraWNoZXZAZ21haWwuY29t',
     'aHR0cHM6Ly9naXRodWIuY29tL2x1a2ljaGV2',
@@ -878,14 +1089,13 @@
   }
 
   function exportPDF() {
-    revealContact(); // ensure contact is visible before print dialog
+    revealContact();
     setTimeout(() => window.print(), 100);
   }
 
-  // Always reveal contact when printing (e.g. Ctrl+P)
   window.addEventListener('beforeprint', revealContact);
 
-  // Active nav link on scroll
+  // ── Active nav link on scroll ──
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
 
